@@ -18,7 +18,7 @@ export default props => (
           activeTintColor: "#f0f",
           labelStyle: { fontSize: 15, marginBottom: 4 }
         }}
-        initialRouteName='giroscopio'>
+        initialRouteName='Giroscopio'>
         <Tab.Screen name="Giroscopio" component={Giroscopio} options={{
           tabBarIcon: () => (
             <Ionicons name="compass-outline" color="black" size={30} />

@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import {useEffect, useState} from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
+import Estilo from '../css/acelerometro';
 
 const Acelerometro = () => {  
     const [{ x, y, z }, setData] = useState({x: 0,  y: 0,  z: 0 });
@@ -25,19 +26,19 @@ const Acelerometro = () => {
       }, []);
     
       return (
-        <View style={styles.container}>
-          <Text style={styles.text}>Colhendo dados do sensor acelerometro</Text>
+        <View style={Estilo.container}>
+          <Text style={Estilo.text}>Colhendo dados do sensor acelerometro</Text>
           <Text >x: {x}</Text>
           <Text >y: {y}</Text>
           <Text >z: {z}</Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={subscription ? _unsubscribe : _subscribe} style={styles.button}>
+          <View style={Estilo.buttonContainer}>
+            <TouchableOpacity onPress={subscription ? _unsubscribe : _subscribe} style={Estilo.button}>
               <Text>{subscription ? 'On' : 'Off'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={_slow} style={[styles.button, styles.middleButton]}>
+            <TouchableOpacity onPress={_slow} style={[Estilo.button, Estilo.middleButton]}>
               <Text>Slow</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={_fast} style={styles.button}>
+            <TouchableOpacity onPress={_fast} style={Estilo.button}>
               <Text>Fast</Text>
             </TouchableOpacity>
           </View>
@@ -46,35 +47,3 @@ const Acelerometro = () => {
     }
 
 export default Acelerometro
-
-const styles = StyleSheet.create({
-  container: {
-      marginTop: 250,
-    alignItems: 'center',
-    justifyContent:'center'
-  },
-
-  text: {
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-
-  buttonContainer: {
-    margin: 40,
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    marginTop: 15,
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eee',
-    padding: 10,
-  },
-  middleButton: {
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderColor: '#ccc',
-  },
-});

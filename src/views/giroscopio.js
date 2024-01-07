@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import {useEffect, useState} from 'react';
-import { Button, SafeAreaView, StyleSheet,  Switch,  Text, View } from 'react-native';
+import { Button, SafeAreaView, Switch,  Text, View } from 'react-native';
 import { Gyroscope } from 'expo-sensors';
+import Estilo from '../css/giroscopio'
 
 const Giroscopio = () => {
   const [ gyroData, setGyroData ] = useState({x:0, y:0, z:0});
@@ -27,16 +28,16 @@ const Giroscopio = () => {
   }
   
   return (
-    <SafeAreaView style={styles.container}>
-        <Text style={styles.titulo}>Ative o botão para acionar o sensor giroscopio</Text>
-        <View style={styles.botaoLiga}>
+    <SafeAreaView style={Estilo.container}>
+        <Text style={Estilo.titulo}>Ative o botão para acionar o sensor giroscopio</Text>
+        <View style={Estilo.botaoLiga}>
           <Switch 
           trackColor={{false: '#767677', true: '81b0ff'}}
           thumbColor={gyro ? '#f5dd4b': ' #f4f4f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={ligar}
           value={gyro}
-          style={styles.switch}
+          style={Estilo.switch}
         />
         </View>
         <View style={{
@@ -49,7 +50,7 @@ const Giroscopio = () => {
             {translateY: -gyroData.x * 10},
           ],
           }} />
-        <Text style={styles.help}>click no botão para registra no banco de dados que o sensor esta funcionando</Text>
+        <Text style={Estilo.help}>click no botão para registra no banco de dados que o sensor esta funcionando</Text>
 
           <Button
           title="concluido"
@@ -59,30 +60,3 @@ const Giroscopio = () => {
 };
 
 export default Giroscopio
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-  },
-
-  titulo: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    margin: 80,
-  },
-
-  botaoLiga:{
-    marginBottom: 60,
-    marginTop: 64
-  },
-
-  switch:{
-    transform:[{scaleX: 1.5}, {scaleY: 1.5}]
-  },
-
-  help: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    margin: 40,
-  },
-});
