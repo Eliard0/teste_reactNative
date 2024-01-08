@@ -10,7 +10,7 @@ const Acelerometro = () => {
   const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
   const [subscription, setSubscription] = useState(null);
 
-  Accelerometer.setUpdateInterval(5000);
+  Accelerometer.setUpdateInterval(4000);
 
   const _ligado = () => {
     setSubscription(Accelerometer.addListener(setData));
@@ -31,7 +31,7 @@ const Acelerometro = () => {
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO sensor (nome_sensor, dado) VALUES (?, ?);',
-        ['acelerometro', JSON.stringify(dados)],
+        ['Acelerometro', JSON.stringify(dados)],
         (_, result) => {
           console.log('Result:', result);
         },
