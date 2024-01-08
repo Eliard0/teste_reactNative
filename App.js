@@ -38,9 +38,3 @@ export default props => (
     </NavigationContainer>
   </>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

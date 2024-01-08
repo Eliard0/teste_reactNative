@@ -3,17 +3,18 @@ import { useEffect, useState } from 'react';
 import { Button, SafeAreaView, Switch, Text, View } from 'react-native';
 import { Gyroscope } from 'expo-sensors';
 import Estilo from '../css/giroscopio'
+import db from '../services/db'
 
 const Giroscopio = () => {
-  const [gyroData, setGyroData] = useState({ x: 0, y: 0, z: 0 });
-  const [gyro, setGyro] = useState(false);
+  const [giroData, setGiroData] = useState({ x: 0, y: 0, z: 0 });
+  const [giro, setGiro] = useState(false);
 
   useEffect(() => {
     let subscription;
 
-    if (gyro) {
+    if (giro) {
       subscription = Gyroscope.addListener(gyroScopeData => {
-        setGyroData(gyroScopeData);
+        setGiroData(gyroScopeData);
       })
     } else {
       subscription?.remove();
@@ -21,10 +22,26 @@ const Giroscopio = () => {
     return () => {
       subscription?.remove()
     };
-  }, [gyro]);
+  }, [giro]);
 
   const ligar = () => {
-    setGyro(!gyro);
+    setGiro(!giro);
+  }
+
+  const guardaDados = () => {
+    const dados = giroData
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO sensor (nome_sensor, dado) VALUES (?, ?);',
+        ['Giroscopio', JSON.stringify(dados)],
+        (_, result) => {
+          console.log('Result:', result);
+        },
+        (_, error) => {
+          console.log('Error:', error);
+        }
+      );
+    });
   }
 
   return (
@@ -33,10 +50,10 @@ const Giroscopio = () => {
       <View style={Estilo.botaoLiga}>
         <Switch
           trackColor={{ false: '#767677', true: '81b0ff' }}
-          thumbColor={gyro ? '#f5dd4b' : ' #f4f4f4'}
+          thumbColor={giro ? '#f5dd4b' : ' #f4f4f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={ligar}
-          value={gyro}
+          value={giro}
           style={Estilo.switch}
         />
       </View>
@@ -46,14 +63,15 @@ const Giroscopio = () => {
         borderRadius: 50,
         backgroundColor: 'red',
         transform: [
-          { translateX: gyroData.y * 10 },
-          { translateY: -gyroData.x * 10 },
+          { translateX: giroData.y * 10 },
+          { translateY: -giroData.x * 10 },
         ],
       }} />
       <Text style={Estilo.help}>click no botão para registra no banco de dados que o sensor esta funcionando</Text>
 
       <Button
-        title="concluido"
+        title="Guardar dados"
+        onPress={guardaDados}
       />
     </SafeAreaView>
   );
