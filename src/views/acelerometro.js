@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { Text, TouchableOpacity, View, Button } from 'react-native';
+import { Text, TouchableOpacity, View, Button, SafeAreaView } from 'react-native';
 import { Accelerometer } from 'expo-sensors';
 import Estilo from '../css/acelerometro';
 import db from '../services/db';
@@ -27,10 +27,11 @@ const Acelerometro = () => {
   }, []);
 
   const guardaDados = () => {
+    const dados = {x, y, z}
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO sensor (nome_sensor, dado) VALUES (?, ?);',
-        ['acelerometro', x],
+        ['acelerometro', JSON.stringify(dados)],
         (_, result) => {
           console.log('Result:', result);
         },

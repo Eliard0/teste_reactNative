@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, Button, View, SafeAreaView, ScrollView, RefreshControl } from 'react-native';
+import { Text, TouchableOpacity, View, SafeAreaView, ScrollView, RefreshControl } from 'react-native';
+import Estilo from '../css/dados'
 import db from '../services/db';
 
 const Dados = () => {
@@ -51,9 +52,15 @@ const Dados = () => {
   if (dados.length === 0) {
     return (
       <SafeAreaView>
-        <View style={styles.container}>
-          <Text>Não ha dados registrados no banco de dados</Text>
-        </View>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={recarregar} onRefresh={carregarDados} />
+          }
+        >
+          <View style={[Estilo.text, Estilo.container]}>
+            <Text>Não ha dados registrados no banco de dados</Text>
+          </View>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -65,19 +72,20 @@ const Dados = () => {
           <RefreshControl refreshing={recarregar} onRefresh={carregarDados} />
         }
       >
-        <View style={styles.container}>
+        <View style={Estilo.container}>
           {dados.map(sensor => (
-            <Text key={sensor.id} style={styles.text}>
+            <Text key={sensor.id} style={Estilo.text}>
               Nome do sensor: {sensor.nome_sensor}
               {'\n'}
               Dado: {sensor.dado}
             </Text>
           ))}
-
-          <Button
-            title='apagar todos os dados'
+          <TouchableOpacity
             onPress={apagarDados}
-          />
+            style={Estilo.buttonApagarDados}
+          >
+            <Text style={Estilo.textButton}>Apagar todos os dados'</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -85,16 +93,3 @@ const Dados = () => {
 }
 
 export default Dados
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  text: {
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-});
