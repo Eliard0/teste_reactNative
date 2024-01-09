@@ -5,7 +5,6 @@ import { Accelerometer } from 'expo-sensors';
 import Estilo from '../css/acelerometro';
 import db from '../services/db';
 
-
 const Acelerometro = () => {
   const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
   const [subscription, setSubscription] = useState(null);
@@ -44,7 +43,7 @@ const Acelerometro = () => {
 
   return (
     <SafeAreaView style={Estilo.container}>
-      <View >
+      <View>
         <Text style={Estilo.text}>Colhendo dados do sensor acelerometro</Text>
         <Text style={Estilo.valorX}>X: {x}</Text>
         <Text style={Estilo.valorY}>Y: {y}</Text>

@@ -59,6 +59,7 @@ const Dados = () => {
         >
           <View style={[Estilo.text, Estilo.container]}>
             <Text>Não ha dados registrados no banco de dados</Text>
+            <Text>Caso já tenha guardado algum dado do sensor araste a tela de cima para baixo para atualizar</Text>
           </View>
         </ScrollView>
       </SafeAreaView>

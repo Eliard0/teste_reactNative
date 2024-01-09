@@ -61,13 +61,13 @@ const Giroscopio = () => {
         width: 100,
         height: 100,
         borderRadius: 50,
+        marginBottom:40,
         backgroundColor: 'red',
         transform: [
           { translateX: giroData.y * 10 },
           { translateY: -giroData.x * 10 },
         ],
       }} />
-      <Text style={Estilo.help}>click no botão para registra no banco de dados que o sensor esta funcionando</Text>
 
       <Button
         title="Guardar dados"

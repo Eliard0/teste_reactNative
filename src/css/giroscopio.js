@@ -2,18 +2,20 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     container: {
+        flex:1,
         alignItems: 'center',
+        justifyContent: 'center'
     },
 
     titulo: {
         fontSize: 25,
         fontWeight: 'bold',
-        margin: 80,
+        margin: 20,
     },
 
     botaoLiga: {
         marginBottom: 60,
-        marginTop: 64
+        marginTop: 40
     },
 
     switch: {
