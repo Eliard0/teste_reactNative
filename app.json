@@ -2,7 +2,7 @@
   "expo": {
     "name": "testeReactNative",
     "slug": "testeReactNative",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -18,16 +18,27 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.eliardo.testeReactNative"
     },
     "web": {
       "favicon": "./assets/icon.png"
     },
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      "expo-build-properties"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "8dc30384-00dd-4719-b7ba-bc26e67f565d"
+      }
+    }
   }
 }

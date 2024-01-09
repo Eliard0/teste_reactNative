@@ -27,7 +27,7 @@ const Acelerometro = () => {
   }, []);
 
   const guardaDados = () => {
-    const dados = {x, y, z}
+    const dados = { x, y, z }
     db.transaction(tx => {
       tx.executeSql(
         'INSERT INTO sensor (nome_sensor, dado) VALUES (?, ?);',
@@ -43,21 +43,24 @@ const Acelerometro = () => {
   }
 
   return (
-    <View style={Estilo.container}>
-      <Text style={Estilo.text}>Colhendo dados do sensor acelerometro</Text>
-      <Text style={Estilo.valorX}>X: {x}</Text>
-      <Text style={Estilo.valorY}>Y: {y}</Text>
-      <Text style={Estilo.valorZ}>Z: {z}</Text>
+    <SafeAreaView>
 
-      <TouchableOpacity onPress={subscription ? _desligado : _ligado} style={Estilo.buttonLigadoDesligado}>
-        <Text>{subscription ? 'LIGADO' : 'DESLIGADO'}</Text>
-      </TouchableOpacity>
+      <View style={Estilo.container}>
+        <Text style={Estilo.text}>Colhendo dados do sensor acelerometro</Text>
+        <Text style={Estilo.valorX}>X: {x}</Text>
+        <Text style={Estilo.valorY}>Y: {y}</Text>
+        <Text style={Estilo.valorZ}>Z: {z}</Text>
 
-      <Button
-        title="Guardar dados"
-        onPress={guardaDados}
-      />
-    </View>
+        <TouchableOpacity onPress={subscription ? _desligado : _ligado} style={Estilo.buttonLigadoDesligado}>
+          <Text>{subscription ? 'LIGADO' : 'DESLIGADO'}</Text>
+        </TouchableOpacity>
+
+        <Button
+          title="Guardar dados"
+          onPress={guardaDados}
+        />
+      </View>
+    </SafeAreaView>
   );
 }
 
