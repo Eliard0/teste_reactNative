@@ -1,1 +1,1 @@
-*Foi gerado somente o apk para android do app por questões de limitação hardware
+*Foi gerado somente o apk para android do app por limitação de hardware
