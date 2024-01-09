@@ -10,7 +10,7 @@ const Acelerometro = () => {
   const [{ x, y, z }, setData] = useState({ x: 0, y: 0, z: 0 });
   const [subscription, setSubscription] = useState(null);
 
-  Accelerometer.setUpdateInterval(4000);
+  Accelerometer.setUpdateInterval(3000);
 
   const _ligado = () => {
     setSubscription(Accelerometer.addListener(setData));
@@ -43,9 +43,8 @@ const Acelerometro = () => {
   }
 
   return (
-    <SafeAreaView>
-
-      <View style={Estilo.container}>
+    <SafeAreaView style={Estilo.container}>
+      <View >
         <Text style={Estilo.text}>Colhendo dados do sensor acelerometro</Text>
         <Text style={Estilo.valorX}>X: {x}</Text>
         <Text style={Estilo.valorY}>Y: {y}</Text>
